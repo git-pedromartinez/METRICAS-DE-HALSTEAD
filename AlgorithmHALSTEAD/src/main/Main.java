@@ -11,7 +11,7 @@ public class Main {
         codePython=initCodePython();
         System.out.println(getHalstead(codePython));
     }
-    private static ArrayList<String> initCodePython(){
+    public static ArrayList<String> initCodePython(){
         ArrayList<String> codePython = new ArrayList<String>();
         codePython.add("def mul(x,y):");
         codePython.add("z = 0");
@@ -21,12 +21,12 @@ public class Main {
         codePython.add("return z");
         return codePython;
     }
-    private static String  getHalstead(ArrayList<String> code){
+    public static Halstead getHalstead(ArrayList<String> code){
 //        for (String string : initCodePython()) {
 //            System.out.println(string);
 //        }
         Halstead h=new Halstead(9,12,6,14);
-        return h.getValues();
+        return h;
     }
     private static ArrayList<String> getArrayOperators(){
         ArrayList<String> operators=new ArrayList<String>();
