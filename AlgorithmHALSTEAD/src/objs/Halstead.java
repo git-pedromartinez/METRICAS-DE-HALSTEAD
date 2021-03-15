@@ -1,7 +1,5 @@
 package objs;
 
-import models.HALSTEAD;
-
 public class Halstead {
     int n1;
     int N1;
