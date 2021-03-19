@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<String> codePython = initCodePython("C:/dev/py/mul.py");
         System.out.println(getHalstead(codePython));
-        System.out.println(operandsList);
+//        System.out.println(operandsList);
     }
 
     public static ArrayList<String> initCodePython(String path) {
