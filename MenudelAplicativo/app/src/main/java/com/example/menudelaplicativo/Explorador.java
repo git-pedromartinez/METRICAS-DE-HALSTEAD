@@ -1,6 +1,7 @@
 package com.example.menudelaplicativo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.ListFragment;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -27,7 +28,7 @@ public class Explorador extends AppCompatActivity implements AdapterView.OnItemC
 
     private List<String> listaNombreArchivos;
     private List<String> listaRutasArchivos;
-    private ArrayAdapter<String> adaptador;
+    private ArrayAdapter<String>  adaptador;
     private  String directorioRaiz;
     private TextView carpetaActual;
     private ListView listas;
@@ -37,23 +38,24 @@ public class Explorador extends AppCompatActivity implements AdapterView.OnItemC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explorador);
+
         carpetaActual = (TextView) findViewById(R.id.rutaActual);
         listas = (ListView) findViewById(R.id.listView_Lista);
 
         directorioRaiz = Environment.getExternalStorageDirectory().getPath();
         listas.setOnItemClickListener(this);
         verArchivoDirectorio(directorioRaiz);
-
     }
 
     private void verArchivoDirectorio(String rutaDirectorio){
-        carpetaActual.setText("Estas en: "+rutaDirectorio);
-       listaNombreArchivos = new ArrayList<String>();
+        carpetaActual.setText("Estas en: " + rutaDirectorio);
+        listaNombreArchivos = new ArrayList<String>();
         listaRutasArchivos = new ArrayList<String>();
 
+        int x = 0;
         File directorioActual = new File(rutaDirectorio);
         File[] listaArchivos = directorioActual.listFiles();
-        int x = 0;
+
 
         if(!rutaDirectorio.equals(directorioRaiz)){
             listaNombreArchivos.add(".. /");
@@ -69,39 +71,47 @@ public class Explorador extends AppCompatActivity implements AdapterView.OnItemC
 
         for(int i=x; i < listaRutasArchivos.size(); i++){
             File archivo = new File(listaRutasArchivos.get(i));
-              if(archivo.isFile()){
+
+            if(archivo.isFile()){
                   listaNombreArchivos.add(archivo.getName());
               }else{
                   listaNombreArchivos.add("/"+ archivo.getName());
               }
         }
 
-        if(listaArchivos.length==0){
+        if(listaArchivos.length<1){
             listaNombreArchivos.add("No hay ningun archivo");
             listaRutasArchivos.add(rutaDirectorio);
         }
 
         adaptador = new ArrayAdapter<String>(this,
                 R.layout.lista_archivo, listaNombreArchivos);
-          listas.setAdapter(adaptador);
+        listas.setAdapter(adaptador);
+
     }
+
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        File archivo = new File(listaRutasArchivos.get(position));
-        if(archivo.isFile()){
+    public void onItemClick(AdapterView<?> AdapterView, View view, int position, long id) {
+        try {
+            File archivo = new File(listaRutasArchivos.get(position));
+            if(archivo.isFile()){
+                String ubicacion = archivo.getAbsolutePath();
+                Intent i = new Intent(this,CalcularMetricas.class);
+                i.putExtra("ubicacion",ubicacion);
+                startActivity(i);
 
-            String ubicacion = archivo.getAbsolutePath();
-            Intent i = new Intent(this,CalcularMetricas.class);
-            i.putExtra("ubicacion",ubicacion);
-            startActivity(i);
-
+                Toast.makeText(this,
+                        "Has seleccionado el archivo: "+ archivo.getName(),
+                        Toast.LENGTH_LONG).show();
+            }else{
+                verArchivoDirectorio(listaRutasArchivos.get(position));
+            }
+        }catch (Exception e){
             Toast.makeText(this,
-                    "Has seleccionado el archivo: "+ archivo.getName(),
+                    "No se puede acceder a esta direccion ",
                     Toast.LENGTH_LONG).show();
-        }else{
-            verArchivoDirectorio(listaRutasArchivos.get(position));
+            System.out.println("Error al obtener direccion");
         }
     }
-
 }
