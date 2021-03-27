@@ -40,6 +40,7 @@ public class Explorador extends AppCompatActivity implements AdapterView.OnItemC
         setContentView(R.layout.activity_explorador);
 
         carpetaActual = (TextView) findViewById(R.id.rutaActual);
+        System.out.println(carpetaActual);
         listas = (ListView) findViewById(R.id.listView_Lista);
 
         directorioRaiz = Environment.getExternalStorageDirectory().getPath();
