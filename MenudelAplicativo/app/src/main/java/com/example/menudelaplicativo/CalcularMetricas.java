@@ -170,21 +170,56 @@ public class CalcularMetricas extends AppCompatActivity {
 
     private static ArrayList<String> getArrayOperators() {
         ArrayList<String> operators = new ArrayList<String>();
+        //palabras reservadas del lenguaje
+        operators.add("and");
+        operators.add("del");
+        operators.add("for");
+        operators.add("is");
+        operators.add("raise");
+        operators.add("assert");
+        operators.add("if");
+        operators.add("else");
+        operators.add("elif");
+        operators.add("from");
+        operators.add("lambda");
+//        operators.add("return");
+        operators.add("break");
+        operators.add("global");
+        operators.add("not");
+        operators.add("try");
+        operators.add("class");
+        operators.add("except");
+        operators.add("or");
+        operators.add("while");
+        operators.add("continue");
+        operators.add("exec");
+        operators.add("import");
+        operators.add("yield");
         operators.add("def");
+        operators.add("finally");
+        operators.add("in");
+        operators.add("print");
+        //operadores del lenguaje
+            //unarios
         operators.add(":");
-        operators.add("=");
-        operators.add(">");
+            //binarios
         operators.add("+");
         operators.add("-");
-        operators.add("while");
+        operators.add("=");
         operators.add(">");
+        operators.add("<");
+            //otros
         operators.add(",");
+        operators.add(".");
+        operators.add("[");
         operators.add("(");
         return operators;
     }
 
     private static ArrayList<String> getArrayNoOperators() {
         ArrayList<String> operators = new ArrayList<String>();
+        //operadores de cierre
+        operators.add("]");
         operators.add(")");
         operators.add("return");
         return operators;
