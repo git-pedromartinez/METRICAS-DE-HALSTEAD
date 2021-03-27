@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Menu del Aplicativo</string>
+    <string name="btnGuardar">Guardar Datos</string>
+</resources>
