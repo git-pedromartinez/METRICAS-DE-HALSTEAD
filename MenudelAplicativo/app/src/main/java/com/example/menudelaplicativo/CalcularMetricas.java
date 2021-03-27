@@ -205,6 +205,9 @@ public class CalcularMetricas extends AppCompatActivity {
             //binarios
         operators.add("+");
         operators.add("-");
+        operators.add("*");
+        operators.add("/");
+        operators.add("%");
         operators.add("=");
         operators.add(">");
         operators.add("<");
